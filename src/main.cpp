@@ -8,6 +8,7 @@
  * License: BSD-3-Clause-LBNL
  */
 #include "ImpactX.H"
+#include "ImpactXVersion.H"
 #include "initialization/InitAMReX.H"
 
 #include <AMReX.H>
@@ -26,9 +27,15 @@ int main(int argc, char* argv[])
 
     // although ImpactX' init_grids will call this if not done before, we call
     // it here so users can pass command line arguments
+    //amrex::Print() crashes here because need to init amrex
+
     impactx::initialization::default_init_AMReX(argc, argv);
 
-    {
+    amrex::Print() << "ImpactX starting: " << IMPACTX_VERSION << " (" << IMPACTX_GIT_VERSION << ")" << std::endl;
+
+    if (argc == 1) {
+        amrex::Print() << "At least one file path argument is required. Exiting." << std::endl;
+    } else      {
         BL_PROFILE_VAR("main()", pmain);
         impactx::ImpactX impactX;
         impactX.init_grids();

@@ -8,6 +8,7 @@
  * License: BSD-3-Clause-LBNL
  */
 #include "ImpactX.H"
+#include "ImpactXVersion.H"
 #include "initialization/InitAmrCore.H"
 #include "particles/ImpactXParticleContainer.H"
 #include "particles/Push.H"
@@ -97,8 +98,10 @@ namespace impactx {
         // init blocks / grids & MultiFabs
         amr_data->InitFromScratch(0.0);
 
-        // prepare particle containers
-        //   have to do this here, not in the constructor because grids have not
+        amrex::Print() << "ImpactX IOTA edition grid init: " << IMPACTX_VERSION << " (" << IMPACTX_GIT_VERSION << ")" << std::endl;
+
+        // alloc particle containers
+        //   have to resize here, not in the constructor because grids have not
         //   been built when constructor was called.
         amr_data->track_particles.m_particle_container->prepare();
         amr_data->track_particles.m_particles_lost->prepare();
