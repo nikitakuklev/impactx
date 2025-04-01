@@ -3,6 +3,7 @@ build_*/
 Backtrace.*
 *.vth
 *.sw[opqrs]
+.vs
 
 ####################
 # AMReX data files #

@@ -425,6 +425,8 @@ if(ImpactX_PYTHON)
     add_custom_target(${ImpactX_CUSTOM_TARGET_PREFIX}pip_wheel
         ${CMAKE_COMMAND} -E rm -f -r impactx-whl
         COMMAND
+            ${CMAKE_COMMAND} -E copy ${CMAKE_INSTALL_BINDIR}/amrex_3d.dll $<TARGET_FILE_DIR:pyImpactX>/amrex_3d.dll
+        COMMAND
             ${CMAKE_COMMAND} -E env PYIMPACTX_LIBDIR=$<TARGET_FILE_DIR:pyImpactX>
                 ${Python_EXECUTABLE} -m pip ${PY_PIP_OPTIONS} wheel --no-build-isolation --no-deps --wheel-dir=impactx-whl "${ImpactX_SOURCE_DIR}"
         COMMAND_EXPAND_LISTS VERBATIM
