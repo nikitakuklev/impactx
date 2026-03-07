@@ -1362,8 +1362,8 @@ void init_elements(py::module& m)
             "Radius of curvature in m"
         )
         .def_property("phi",
-            [](ExactSbend & exact_sbend) { return exact_sbend.m_phi; },
-            [](ExactSbend & exact_sbend, amrex::ParticleReal phi) { exact_sbend.m_phi = phi; },
+            [](ExactSbend & exact_sbend) { return exact_sbend.m_phi / ExactSbend::degree2rad; },
+            [](ExactSbend & exact_sbend, amrex::ParticleReal phi) { exact_sbend.m_phi = phi * ExactSbend::degree2rad; },
             "Bend angle in degrees"
         )
         .def_property("B",
@@ -2326,13 +2326,13 @@ void init_elements(py::module& m)
              "An exact pole-face rotation in the x-z plane. Both angles are in degrees."
         )
         .def_property("phi_in",
-            [](PRot & prot) { return prot.m_phi_in; },
-            [](PRot & prot, amrex::ParticleReal phi_in) { prot.m_phi_in = phi_in; },
+            [](PRot & prot) { return prot.m_phi_in / PRot::degree2rad; },
+            [](PRot & prot, amrex::ParticleReal phi_in) { prot.m_phi_in = phi_in * PRot::degree2rad; },
             "angle of the reference particle with respect to the longitudinal (z) axis in the original frame in degrees"
         )
         .def_property("phi_out",
-            [](PRot & prot) { return prot.m_phi_out; },
-            [](PRot & prot, amrex::ParticleReal phi_out) { prot.m_phi_out = phi_out; },
+            [](PRot & prot) { return prot.m_phi_out / PRot::degree2rad; },
+            [](PRot & prot, amrex::ParticleReal phi_out) { prot.m_phi_out = phi_out * PRot::degree2rad; },
             "angle of the reference particle with respect to the longitudinal (z) axis in the rotated frame in degrees"
         )
     ;
@@ -2439,8 +2439,8 @@ void init_elements(py::module& m)
              "A thin kick model of a dipole bend."
         )
         .def_property("theta",
-            [](ThinDipole & thin_dp) { return thin_dp.m_theta; },
-            [](ThinDipole & thin_dp, amrex::ParticleReal theta) { thin_dp.m_theta = theta; },
+            [](ThinDipole & thin_dp) { return thin_dp.m_theta / ThinDipole::degree2rad; },
+            [](ThinDipole & thin_dp, amrex::ParticleReal theta) { thin_dp.m_theta = theta * ThinDipole::degree2rad; },
             "Bend angle (degrees)"
         )
         .def_property("rc",
